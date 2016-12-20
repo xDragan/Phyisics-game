@@ -20,7 +20,7 @@ public:
 	bool CleanUp();
 
 	void OnCollision(PhysBody3D* body1, PhysBody3D* body2);
-	void AddWall(uint size_x, uint size_y, uint size_z, uint pos_x, uint pos_y, uint pos_z, Color color);
+	void AddWall(uint size_x, uint size_y, uint size_z, float pos_x, float pos_y, float pos_z, Color color, int angle=0);
 
 public:
 

@@ -54,8 +54,8 @@ bool ModuleSceneIntro::Start()
 	AddWall(10, 2, 1, 90, 1, 130, Black);
 	AddWall(10, 2, 1, 100, 1, 130, Red);
 	AddWall(10, 2, 1, 110, 1, 130, Black);
-	//AddWall(10, 2, 1, 120, 1, 130, Red);
-	//AddWall(10, 2, 1, 130, 1, 130, Black);
+	AddWall(10, 2, 1, 123, 1, 140, Red,30);
+	AddWall(10, 2, 1, 131, 1, 133.5, Black,50);
 	AddWall(10, 2, 1, 140, 1, 130, Red);
 	AddWall(10, 2, 1, 150, 1, 130, Black);
 	return ret;
@@ -86,12 +86,13 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 {
 }
 
-void ModuleSceneIntro::AddWall(uint size_x, uint size_y, uint size_z, uint pos_x, uint pos_y, uint pos_z, Color color) {
+void ModuleSceneIntro::AddWall(uint size_x, uint size_y, uint size_z, float pos_x, float pos_y, float pos_z, Color color, int angle) {
 
 	Cube w1;
 	w1.size.Set(size_x, size_y, size_z);
 	w1.SetPos(pos_x, pos_y, pos_z);
 	w1.color = color;
+	w1.SetRotation(angle, { 0,90,0 });
 	wall.PushBack(w1);
 	App->physics->AddBody(wall[wall.Count()-1], 0);
 }
