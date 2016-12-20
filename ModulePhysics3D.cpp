@@ -49,7 +49,7 @@ bool ModulePhysics3D::Init()
 bool ModulePhysics3D::Start()
 {
 	LOG("Creating Physics environment");
-
+	debug = !debug;
 	world = new btDiscreteDynamicsWorld(dispatcher, broad_phase, solver, collision_conf);
 	world->setDebugDrawer(debug_draw);
 	world->setGravity(GRAVITY);

@@ -38,6 +38,6 @@ public:
 
 public:
 	p2DynArray<Cube>wall;
-
+	Cube Floor;
 
 };

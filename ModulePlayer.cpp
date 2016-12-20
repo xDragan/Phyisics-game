@@ -97,8 +97,12 @@ bool ModulePlayer::Start()
 	car.wheels[3].steering = false;
 
 	vehicle = App->physics->AddVehicle(car);
-	vehicle->SetPos(0, 12, 10);
-	
+	vehicle->SetPos(0, 11, 115);
+	mat4x4 matrix;
+	vehicle->GetTransform(&matrix);
+	matrix.rotate(90, { 0,90,0 });
+	vehicle->SetTransform(&matrix);
+
 	return true;
 }
 
@@ -124,7 +128,9 @@ update_status ModulePlayer::Update(float dt)
 		else {
 			acceleration = MAX_ACCELERATION;
 		}
-		fuel -= 0.02;
+		if (fuel > 0) {
+			fuel -= 0.01;
+		}
 	}
 
 	if(App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
@@ -139,7 +145,7 @@ update_status ModulePlayer::Update(float dt)
 			turn -= TURN_DEGREES;
 	}
 
-	if(App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+	if(App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT && fuel>0)
 	{
 		if (vehicle->GetKmh() <= -30) {
 			acceleration = MAX_ACCELERATION / 10;
@@ -149,8 +155,10 @@ update_status ModulePlayer::Update(float dt)
 			brake = BRAKE_POWER;
 		}
 	}
+	if (fuel > 0) {
+		fuel -= 0.01;
+	}
 	brake = 10;
-	fuel -= 0.01;
 
 	vehicle->ApplyEngineForce(acceleration);
 	vehicle->Turn(turn);
@@ -159,7 +167,7 @@ update_status ModulePlayer::Update(float dt)
 	vehicle->Render();
 
 	char title[80];
-	sprintf_s(title, "%.1f Km/h // FUEL: %.3f", vehicle->GetKmh(), fuel);
+	sprintf_s(title, "%.1f Km/h // Fuel: %.3f", vehicle->GetKmh(), fuel);
 	App->window->SetTitle(title);
 
 	return UPDATE_CONTINUE;
