@@ -46,14 +46,23 @@ bool ModuleSceneIntro::Start()
 	AddWall(10, 2, 1, 10, 1, 130, Black);
 	AddWall(10, 2, 1, 20, 1, 130, Red);
 	AddWall(10, 2, 1, 30, 1, 130, Black);
-	//AddWall(10, 2, 1, 40, 1, 130, Red);
-	//AddWall(10, 2, 1, 50, 1, 130, Black);
+	AddWall(10, 2, 1, 38, 1, 133.5, Red,-50);
+	AddWall(10, 2, 1, 46, 1, 140, Black,-30);
+
 	AddWall(10, 2, 1, 60, 1, 130, Red);
 	AddWall(10, 2, 1, 70, 1, 130, Black);
 	AddWall(10, 2, 1, 80, 1, 130, Red);
 	AddWall(10, 2, 1, 90, 1, 130, Black);
 	AddWall(10, 2, 1, 100, 1, 130, Red);
 	AddWall(10, 2, 1, 110, 1, 130, Black);
+	//boxes
+	AddWall(16, 2, 1, 57, 1, 143, Red,-7);
+	AddWall(10, 2, 1, 70, 1, 144, Black);
+	AddWall(10, 2, 1, 80, 1, 144, Red);
+	AddWall(10, 2, 1, 90, 1, 144, Black);
+	AddWall(10, 2, 1, 100, 1, 144, Red);
+	AddWall(16, 2, 1, 110, 1, 143, Black,6);
+
 	AddWall(10, 2, 1, 123, 1, 140, Red,30);
 	AddWall(10, 2, 1, 131, 1, 133.5, Black,50);
 	AddWall(10, 2, 1, 140, 1, 130, Red);
