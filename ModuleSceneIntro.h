@@ -46,8 +46,11 @@ public:
 	Cube sens[5];
 	PhysBody3D* sensor[5];
 	Timer lap, actual;
+	Uint32 fastest;
 
 	p2DynArray<Cube>powerups;
 	PhysBody3D* pu_body[5];
 	int x=0;//rotation for powerups
+
+	int turbo;
 };

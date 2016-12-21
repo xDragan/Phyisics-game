@@ -16,18 +16,19 @@ bool ModuleSceneIntro::Start()
 {
 	LOG("Loading Intro assets");
 	bool ret = true;
-
+	turbo = 50;
 	
 	Floor.color = Grey;
 	Floor.size = { 10000,0,10000 };
 	Floor.SetPos(0, 0, 0);
-
+	fastest = 50;
 	//---------PowerUps
 	AddPowerUp(3, 3, 3, 30, 1, 123, 0); 
 	//--------- Sensors
 	int j = 0;
 	AddSens(2, 6, 40, 70, 1, 123, j++);
 	AddSens(2, 6, 40, 120, 1, 123, j++);
+	sensor[1]->checkpoint = true;
 	actual.Stop();
 	//track
 	int i = 0;
@@ -645,7 +646,7 @@ bool ModuleSceneIntro::Start()
 	AddWall(10, 2, 1,71.48,1,258.05 , i++, 86.491);
 	AddWall(10, 2, 1,71.4,1,248.25 , i++,95.809 );
 	AddWall(10, 2, 1,70.32,1,238.49  , i++,95.891 );
-	AddWall(10, 2, 1, , i++, );
+//	AddWall(10, 2, 1, , i++, );
 	return ret;
 }
 
@@ -691,8 +692,11 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 			lap = actual;
 			LOG("LAP TIME: %i SECONDS", lap.Read()/1000);
 			sensor[1]->checkpoint = false;
+			if (lap.Read()/1000 < fastest) {
+				fastest = lap.Read() / 1000;
+			}
+			actual.Start();
 		}
-		actual.Start();
 	}
 	else if (body1 == sensor[1]) {
 		sensor[1]->checkpoint = true;
