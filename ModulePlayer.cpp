@@ -120,10 +120,16 @@ update_status ModulePlayer::Update(float dt)
 	player_pos = vehicle->vehicle->getChassisWorldTransform().getOrigin();
 	turn = acceleration = brake = 0.0f;
 	fuel += 0.02;
-	if(App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT && fuel>0)
+	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT && fuel > 0)
 	{
-		if (vehicle->GetKmh() >= 250) {
-			acceleration = MAX_ACCELERATION/10;
+		if (vehicle->GetKmh()/3 > 120 && App->input->GetKey(SDL_SCANCODE_LSHIFT) != KEY_REPEAT) {
+			acceleration = MAX_ACCELERATION/1000;
+		}
+		else if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT){
+			if (App->scene_intro->turbo > 0) {
+				App->scene_intro->turbo -= 0.5;
+				acceleration = MAX_ACCELERATION * 1000;
+			}
 		}
 		else {
 			acceleration = MAX_ACCELERATION;
@@ -132,7 +138,6 @@ update_status ModulePlayer::Update(float dt)
 			fuel -= 0.01;
 		}
 	}
-
 	if(App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 	{
 		if(turn < TURN_DEGREES)
@@ -167,7 +172,7 @@ update_status ModulePlayer::Update(float dt)
 	vehicle->Render();
 
 	char title[80];
-	sprintf_s(title, "%.1f Km/h // Fuel: %.3f // Lap time: %i Fastest Lap: %i", vehicle->GetKmh(), fuel, App->scene_intro->actual.Read()/1000, App->scene_intro->fastest);
+	sprintf_s(title, "%.1f Km/h // Fuel: %.3f // Lap time: %i Fastest Lap: %i // TURBO AT %.f ", vehicle->GetKmh()/3, fuel, App->scene_intro->actual.Read()/1000, App->scene_intro->fastest, App->scene_intro->turbo);
 	App->window->SetTitle(title);
 
 	return UPDATE_CONTINUE;

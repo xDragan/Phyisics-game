@@ -661,8 +661,6 @@ bool ModuleSceneIntro::CleanUp()
 // Update
 update_status ModuleSceneIntro::Update(float dt)
 {
-	//Plane p(0, 1, 0, 0);
-	//p.Render();
 	Floor.Render();
 
 	for (int i = 0; i < wall.Count(); i++) {
@@ -695,6 +693,9 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 			if (lap.Read()/1000 < fastest) {
 				fastest = lap.Read() / 1000;
 			}
+			for (int i = 0; i < powerups.Count(); i++) {
+				powerups[i].invisible = false;
+			}
 			actual.Start();
 		}
 	}
@@ -705,6 +706,7 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 		if (powerups[body1->id].invisible != true) {
 			LOG("POWER UP");
 			powerups[body1->id].invisible = true;
+			turbo += 100;
 		}
 	}
 }

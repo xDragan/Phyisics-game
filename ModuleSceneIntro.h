@@ -52,5 +52,5 @@ public:
 	PhysBody3D* pu_body[5];
 	int x=0;//rotation for powerups
 
-	int turbo;
+	float turbo;
 };
