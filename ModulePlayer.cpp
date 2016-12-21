@@ -122,7 +122,7 @@ update_status ModulePlayer::Update(float dt)
 
 	if(App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT && fuel>0)
 	{
-		if (vehicle->GetKmh() >= 120) {
+		if (vehicle->GetKmh() >= 250) {
 			acceleration = MAX_ACCELERATION/10;
 		}
 		else {
