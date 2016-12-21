@@ -20,7 +20,7 @@ public:
 	bool CleanUp();
 
 	void OnCollision(PhysBody3D* body1, PhysBody3D* body2);
-	void AddWall(uint size_x, uint size_y, uint size_z, float pos_x, float pos_y, float pos_z, Color color, int angle=0);
+	void AddWall(uint size_x, uint size_y, uint size_z, float pos_x, float pos_y, float pos_z, Color color, int angle=0, bool sensor=false);
 
 public:
 
@@ -40,4 +40,6 @@ public:
 	p2DynArray<Cube>wall;
 	Cube Floor;
 
+	Cube sens[5];
+	PhysBody3D* sensor[5];
 };

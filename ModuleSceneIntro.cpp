@@ -24,6 +24,13 @@ bool ModuleSceneIntro::Start()
 	Floor.size = { 1000,0,1000 };
 	Floor.SetPos(0, 0, 0);
 
+	//--------- Sensors
+	sens[0].size = vec3(2, 6, 40);
+	sens[0].SetPos(70, 1, 123);
+	sensor[0] = App->physics->AddBody(sens[0], 0.0f);
+	sensor[0]->SetAsSensor(true);
+	sensor[0]->collision_listeners.add(this);
+
 	//track
 	AddWall(10, 2, 1, 0, 1, 100, Red);
 	AddWall(10, 2, 1, 10, 1, 100, Black);
@@ -56,6 +63,7 @@ bool ModuleSceneIntro::Start()
 	AddWall(10, 2, 1, 100, 1, 130, Red);
 	AddWall(10, 2, 1, 110, 1, 130, Black);
 	//boxes
+
 	AddWall(16, 2, 1, 57, 1, 143, Red,-7);
 	AddWall(10, 2, 1, 70, 1, 144, Black);
 	AddWall(10, 2, 1, 80, 1, 144, Red);
@@ -88,20 +96,32 @@ update_status ModuleSceneIntro::Update(float dt)
 	for (int i = 0; i < wall.Count(); i++) {
 		wall[i].Render();
 	}
+
 	return UPDATE_CONTINUE;
 }
 
 void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 {
+	if (body2 == sensor[0]|| body1 == sensor[0]) {
+		LOG("FINAL");
+	}
 }
 
-void ModuleSceneIntro::AddWall(uint size_x, uint size_y, uint size_z, float pos_x, float pos_y, float pos_z, Color color, int angle) {
+void ModuleSceneIntro::AddWall(uint size_x, uint size_y, uint size_z, float pos_x, float pos_y, float pos_z, Color color, int angle, bool sensor) {
 
 	Cube w1;
 	w1.size.Set(size_x, size_y, size_z);
 	w1.SetPos(pos_x, pos_y, pos_z);
-	w1.color = color;
-	w1.SetRotation(angle, { 0,90,0 });
-	wall.PushBack(w1);
-	App->physics->AddBody(wall[wall.Count()-1], 0);
+	if (sensor == true) {
+		//f_sensor =App->physics->AddBody(w1, 0.0f);
+		//f_sensor->SetAsSensor(true);
+		//f_sensor->collision_listeners.add(this);
+	}
+	else {
+		w1.color = color;
+		w1.SetRotation(angle, { 0,90,0 });
+		wall.PushBack(w1);
+		App->physics->AddBody(wall[wall.Count() - 1], 0.0f);
+	}
+	
 }
