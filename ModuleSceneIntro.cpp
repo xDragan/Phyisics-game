@@ -25,12 +25,9 @@ bool ModuleSceneIntro::Start()
 	Floor.SetPos(0, 0, 0);
 
 	//--------- Sensors
-	sens[0].size = vec3(2, 6, 40);
-	sens[0].SetPos(70, 1, 123);
-	sensor[0] = App->physics->AddBody(sens[0], 0.0f);
-	sensor[0]->SetAsSensor(true);
-	sensor[0]->collision_listeners.add(this);
-
+	AddSens(2, 6, 40, 70, 1, 123, 0);
+	AddSens(2, 6, 40, 120, 1, 123, 1);
+	actual.Stop();
 	//track
 	AddWall(10, 2, 1, 0, 1, 100, Red);
 	AddWall(10, 2, 1, 10, 1, 100, Black);
@@ -102,26 +99,36 @@ update_status ModuleSceneIntro::Update(float dt)
 
 void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 {
-	if (body2 == sensor[0]|| body1 == sensor[0]) {
-		LOG("FINAL");
+	//App->player->fuel += 0.02;
+	if (body1 == sensor[0]) {	
+		if (sensor[1]->checkpoint == true) {
+			lap = actual;
+			LOG("LAP TIME: %i SECONDS", lap.Read()/1000);
+			sensor[1]->checkpoint = false;
+		}
+		actual.Start();
+	}
+	else if (body1 == sensor[1]) {
+		sensor[1]->checkpoint = true;
 	}
 }
 
-void ModuleSceneIntro::AddWall(uint size_x, uint size_y, uint size_z, float pos_x, float pos_y, float pos_z, Color color, int angle, bool sensor) {
+void ModuleSceneIntro::AddWall(uint size_x, uint size_y, uint size_z, float pos_x, float pos_y, float pos_z, Color color, int angle) {
 
 	Cube w1;
 	w1.size.Set(size_x, size_y, size_z);
 	w1.SetPos(pos_x, pos_y, pos_z);
-	if (sensor == true) {
-		//f_sensor =App->physics->AddBody(w1, 0.0f);
-		//f_sensor->SetAsSensor(true);
-		//f_sensor->collision_listeners.add(this);
-	}
-	else {
-		w1.color = color;
-		w1.SetRotation(angle, { 0,90,0 });
-		wall.PushBack(w1);
-		App->physics->AddBody(wall[wall.Count() - 1], 0.0f);
-	}
-	
+	w1.color = color;
+	w1.SetRotation(angle, { 0,90,0 });
+	wall.PushBack(w1);
+	App->physics->AddBody(wall[wall.Count() - 1], 0.0f);
 }
+
+void ModuleSceneIntro::AddSens(uint size_x, uint size_y, uint size_z, float pos_x, float pos_y, float pos_z, uint id) {
+
+	sens[id].size = vec3(size_x, size_y, size_z);
+	sens[id].SetPos(pos_x, pos_y, pos_z);
+	sensor[id] = App->physics->AddBody(sens[id], 0.0f);
+	sensor[id]->SetAsSensor(true);
+	sensor[id]->collision_listeners.add(this);
+}	
