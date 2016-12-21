@@ -61,3 +61,15 @@ void PhysBody3D::SetAsSensor(bool is_sensor){
 			body->setCollisionFlags(body->getCollisionFlags() &~btCollisionObject::CF_NO_CONTACT_RESPONSE);
 	}
 }
+
+void PhysBody3D::SetAsPowerup(bool ispowerup, uint id) {
+	this->id = id;
+	if (this->ispowerup != ispowerup)
+	{
+		this->ispowerup = ispowerup;
+		if (ispowerup == true)
+			body->setCollisionFlags(body->getCollisionFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
+		else
+			body->setCollisionFlags(body->getCollisionFlags() &~btCollisionObject::CF_NO_CONTACT_RESPONSE);
+	}
+}

@@ -119,7 +119,7 @@ update_status ModulePlayer::Update(float dt)
 {
 	player_pos = vehicle->vehicle->getChassisWorldTransform().getOrigin();
 	turn = acceleration = brake = 0.0f;
-
+	fuel += 0.02;
 	if(App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT && fuel>0)
 	{
 		if (vehicle->GetKmh() >= 250) {

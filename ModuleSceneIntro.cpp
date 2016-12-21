@@ -17,16 +17,17 @@ bool ModuleSceneIntro::Start()
 	LOG("Loading Intro assets");
 	bool ret = true;
 
-	App->camera->Move(vec3(1.0f, 1.0f, 0.0f));
-	App->camera->LookAt(vec3(0, 0, 0));
 	
 	Floor.color = Grey;
-	Floor.size = { 1000,0,1000 };
+	Floor.size = { 10000,0,10000 };
 	Floor.SetPos(0, 0, 0);
 
+	//---------PowerUps
+	AddPowerUp(3, 3, 3, 30, 1, 123, 0); 
 	//--------- Sensors
-	AddSens(2, 6, 40, 70, 1, 123, 0);
-	AddSens(2, 6, 40, 120, 1, 123, 1);
+	int j = 0;
+	AddSens(2, 6, 40, 70, 1, 123, j++);
+	AddSens(2, 6, 40, 120, 1, 123, j++);
 	actual.Stop();
 	//track
 	int i = 0;
@@ -554,7 +555,19 @@ update_status ModuleSceneIntro::Update(float dt)
 	for (int i = 0; i < wall.Count(); i++) {
 		wall[i].Render();
 	}
+	for (int i = 0; i < powerups.Count(); i++) {
+		if (powerups[i].invisible != true) {
+			powerups[i].Render();
+			powerups[i].SetRotation(x, { 0,90,0 });
+		}
+	}
 
+	if (x < 360) {
+		x++;
+	}else {
+		x = 0;
+	}
+	
 	return UPDATE_CONTINUE;
 }
 
@@ -571,6 +584,12 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 	}
 	else if (body1 == sensor[1]) {
 		sensor[1]->checkpoint = true;
+	}
+	else if (body1->ispowerup == true) {
+		if (powerups[body1->id].invisible != true) {
+			LOG("POWER UP");
+			powerups[body1->id].invisible = true;
+		}
 	}
 }
 
@@ -592,6 +611,17 @@ void ModuleSceneIntro::AddWall(uint size_x, uint size_y, uint size_z, float pos_
 	App->physics->AddBody(wall[wall.Count() - 1], 0);
 }
 
+void ModuleSceneIntro::AddPowerUp(uint size_x, uint size_y, uint size_z, float pos_x, float pos_y, float pos_z, uint id) {
+
+	Cube w1;
+	w1.size.Set(size_x, size_y, size_z);
+	w1.SetPos(pos_x, pos_y, pos_z);
+	w1.color = Blue;
+	powerups.PushBack(w1);
+	pu_body[id]=App->physics->AddBody(w1, 0.0f);
+	pu_body[id]->SetAsPowerup(true,id);
+	pu_body[id]->collision_listeners.add(this);
+}
 
 void ModuleSceneIntro::AddSens(uint size_x, uint size_y, uint size_z, float pos_x, float pos_y, float pos_z, uint id) {
 
