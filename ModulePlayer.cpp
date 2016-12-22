@@ -136,9 +136,9 @@ update_status ModulePlayer::Update(float dt)
 	}
 	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) {
 		mat4x4 matrix;
-		vehicle->SetPos(-10.5, 5, 120.56);
+		vehicle->SetPos(-10.5, 15, 120.56);
 		vehicle->GetTransform(&matrix);
-		matrix.rotate(90, { 90,0,90 });
+		matrix.rotate(270, { 90,0,0 });
 		vehicle->SetTransform(&matrix);
 	}
 	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT && fuel > 0)
