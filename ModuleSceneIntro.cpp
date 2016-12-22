@@ -23,11 +23,12 @@ bool ModuleSceneIntro::Start()
 	Floor.color = Grey;
 	Floor.size = { 10000,0,10000 };
 	Floor.SetPos(0, 0, 0);
+
 	//---------PowerUps
-	AddPowerUp(3, 3, 3, 30, 1, 123, 0); 
+	AddPowerUp(3, 3, 3, 50, 1, 153, 0); 
 	//--------- Sensors
 	int j = 0;
-	AddSens(2, 6, 40, 70, 1, 123, j++);
+	AddSens(110, 6, 2, 5, 1, 123, j++);
 	AddSens(2, 6, 40, 120, 1, 123, j++);
 	actual.Stop();
 	//track
