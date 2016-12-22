@@ -54,4 +54,5 @@ public:
 	int x=0;//rotation for powerups
 
 	float turbo;
+	bool start;
 };

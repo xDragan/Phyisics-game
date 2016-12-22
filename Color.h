@@ -27,6 +27,7 @@ struct Color
 
 extern Color Red;
 extern Color Green;
+extern Color LBlue;
 extern Color Blue;
 extern Color Black;
 extern Color White;

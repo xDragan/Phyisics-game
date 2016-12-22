@@ -16,12 +16,12 @@ bool ModuleSceneIntro::Start()
 {
 	LOG("Loading Intro assets");
 	bool ret = true;
-	turbo = 50;
-	
+	turbo = 50.0;
+	fastest = 100.0;
+
 	Floor.color = Grey;
 	Floor.size = { 10000,0,10000 };
 	Floor.SetPos(0, 0, 0);
-	fastest = 50;
 	//---------PowerUps
 	AddPowerUp(3, 3, 3, 30, 1, 123, 0); 
 	//--------- Sensors
@@ -911,19 +911,23 @@ update_status ModuleSceneIntro::Update(float dt)
 
 void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 {
-	//App->player->fuel += 0.02;
-	if (body1 == sensor[0]) {	
-		if (sensor[1]->checkpoint == true) {
-			lap = actual;
-			LOG("LAP TIME: %i SECONDS", lap.Read()/1000);
-			sensor[1]->checkpoint = false;
-			if (lap.Read()/1000 < fastest) {
-				fastest = lap.Read() / 1000;
-			}
-			for (int i = 0; i < powerups.Count(); i++) {
-				powerups[i].invisible = false;
-			}
-			actual.Start();
+	if (body1 == sensor[0]) {
+		if (sensor[1]->checkpoint == true || start == true) {
+				if (start == true) {
+					start = false;
+				}
+				else {
+					lap = actual;
+					LOG("LAP TIME: %i SECONDS", lap.Read() / 1000);
+					sensor[1]->checkpoint = false;
+					if (lap.Read() / 1000 < fastest) {
+						fastest = lap.Read() / 1000;
+					}
+					for (int i = 0; i < powerups.Count(); i++) {
+						powerups[i].invisible = false;
+					}
+				}
+				actual.Start();
 		}
 	}
 	else if (body1 == sensor[1]) {
@@ -972,7 +976,7 @@ void ModuleSceneIntro::AddPowerUp(uint size_x, uint size_y, uint size_z, float p
 	Cube w1;
 	w1.size.Set(size_x, size_y, size_z);
 	w1.SetPos(pos_x, pos_y, pos_z);
-	w1.color = Blue;
+	w1.color = LBlue;
 	powerups.PushBack(w1);
 	pu_body[id]=App->physics->AddBody(w1, 0.0f);
 	pu_body[id]->SetAsPowerup(true,id);
