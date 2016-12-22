@@ -24,12 +24,12 @@ bool ModulePlayer::Start()
 	car.chassis_size.Set(4, 1,6);
 	car.chassis_offset.Set(0,1,0);
 	car.mass = 950.0f;
-	car.suspensionStiffness = 200.88f;
+	car.suspensionStiffness = 100.88f;
 	car.suspensionCompression = 0.83f;
 	car.suspensionDamping = 1;
 	car.maxSuspensionTravelCm = 200.0f;
-	car.frictionSlip = 1000.5;
-	car.maxSuspensionForce = 300.0f;
+	car.frictionSlip = 500.5;
+	car.maxSuspensionForce = 700.0f;
 
 	// Wheel properties ---------------------------------------
 	float connection_height = 1.2f;
@@ -102,6 +102,7 @@ bool ModulePlayer::Start()
 	vehicle->GetTransform(&matrix);
 	matrix.rotate(180, { 0,90,0 });
 	vehicle->SetTransform(&matrix);
+
 
 	return true;
 }

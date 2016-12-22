@@ -42,6 +42,8 @@ bool ModuleSceneIntro::Start()
 	AddPowerUp(13.789, 0.1, 16.849, -53.85, 1, 217.66, 2);
 	AddPowerUp(13.789, 0.1, 16.849, -32.55, 1, 217.66,3);
 
+	//////////////////////constraint
+	//	AddPowerUp(3, 3, 3, 50, 1, 153, 0); 
 
 
 	actual.Stop();
@@ -901,6 +903,8 @@ bool ModuleSceneIntro::Start()
 	AddBox(2.174, 10, 16.849, -64.88, 1, 217.66, Grey, 0);
 	AddBox(61.404, 3, 2.725, -52.38, 7, 217.8, Grey, 0);
 	AddBox(4, 45.322, 4, -4.93, 3, 202.26, Grey, 27.629);
+
+	
 	return ret;
 }
 
@@ -916,6 +920,7 @@ bool ModuleSceneIntro::CleanUp()
 update_status ModuleSceneIntro::Update(float dt)
 {
 	Floor.Render();
+
 
 	for (int i = 0; i < wall.Count(); i++) {
 		wall[i].Render();

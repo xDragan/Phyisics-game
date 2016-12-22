@@ -360,6 +360,14 @@ void ModulePhysics3D::AddConstraintHinge(PhysBody3D& bodyA, PhysBody3D& bodyB, c
 	hinge->setDbgDrawSize(2.0f);
 }
 
+btHingeConstraint* ModulePhysics3D::Add_Hinge_Constraint(btRigidBody& rbA, btRigidBody& rbB, const btVector3& pivotInA, const btVector3& pivotInB, btVector3& axisInA, btVector3& axisInB, bool disablecollision)
+{
+	btHingeConstraint* constrain = new btHingeConstraint(rbA, rbB, pivotInA, pivotInB, axisInA, axisInB);
+	world->addConstraint(constrain, disablecollision);
+	constraints.add(constrain);
+	return constrain;
+}
+
 // =============================================
 void DebugDrawer::drawLine(const btVector3& from, const btVector3& to, const btVector3& color)
 {

@@ -56,4 +56,7 @@ public:
 	float lap5;
 	float turbo, total_time;
 	bool start;
+
+	/////////////////////////
+
 };

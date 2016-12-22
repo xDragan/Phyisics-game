@@ -20,7 +20,7 @@ public:
 	void SetPos(float x, float y, float z);
 	void SetAsSensor(bool is_sensor);
 	void SetAsPowerup(bool ispowerup, uint id);
-private:
+public:
 	btRigidBody* body = nullptr;
 public:
 	p2List<Module*> collision_listeners;
