@@ -18,6 +18,7 @@ bool ModuleSceneIntro::Start()
 	bool ret = true;
 	turbo = 50.0;
 	fastest = 100.0;
+	start = true;
 
 	Floor.color = Grey;
 	Floor.size = { 10000,0,10000 };
@@ -28,7 +29,6 @@ bool ModuleSceneIntro::Start()
 	int j = 0;
 	AddSens(2, 6, 40, 70, 1, 123, j++);
 	AddSens(2, 6, 40, 120, 1, 123, j++);
-	sensor[1]->checkpoint = true;
 	actual.Stop();
 	//track
 	int i = 0;
@@ -630,7 +630,7 @@ bool ModuleSceneIntro::Start()
 	AddWall(10, 2, 1, 130.96, 1, 369.09, i++, -8.868);
 	AddWall(10, 2, 1, 121.2, 1, 367.18, i++, -8.868);
 	AddWall(10, 2, 1, 111.38, 1, 365.3, i++, -8.868);
-	AddWall(10, 2, 1, 101.76, 1363.57, i++, -8.868);
+	AddWall(10, 2, 1, 101.76, 1,363.57, i++, -8.868);
 	AddWall(10, 2, 1, 92.13, 1, 360.7, i++, -21.448);
 	AddWall(10, 2, 1, 83.02, 1, 356.61, i++, -27.349);
 	AddWall(10, 2, 1, 74.34, 1, 351.56, i++, -33.61);
@@ -677,7 +677,7 @@ bool ModuleSceneIntro::Start()
 	AddWall(10, 2, 1, 594.53, 1, 90.54, i++, -47.88);
 	AddWall(10, 2, 1, 601.21, 1, 98.05, i++, -50.092);
 	AddWall(10, 2, 1, 607.67, 1, 105.77, i++, -49.962);
-	AddWall(10, 2, 1614.21, 1, 113.05, i++, -49.642);
+	AddWall(10, 2, 1, 614.21, 1, 113.05, i++, -49.642);
 	AddWall(10, 2, 1, 620.65, 1, 120.23, i++, -48.165);
 	AddWall(10, 2, 1, 627.11, 1, 127.57, i++, -49.303);
 	AddWall(10, 2, 1, 634.41, 1, 135.27, i++, -48.708);
@@ -819,7 +819,7 @@ bool ModuleSceneIntro::Start()
 	AddWall(10, 2, 1, 781.47, 1, 168.37, i++, 141.462);
 	AddWall(10, 2, 1, 772.3, 1, 164.02, i++, 166.527);
 	AddWall(10, 2, 1, 762.5, 1, 162.3, i++, 173.302);
-	AddWall(10, 2, 1, 752.57, 161.08, i++, -6.969);
+	AddWall(10, 2, 1, 752.57, 1, 161.08, i++, -6.969);
 	AddWall(10, 2, 1, 742.52, 1, 159.69, i++, -6.969);
 	AddWall(10, 2, 1, 732.6, 1, 158.48, i++, -6.969);
 	AddWall(10, 2, 1, 722.86, 1, 157.48, i++, -6.969);
@@ -842,7 +842,7 @@ bool ModuleSceneIntro::Start()
 	AddWall(10, 2, 1, 37.26, 1, 70.33, i++, 87.402);
 	AddWall(10, 2, 1, 37.7, 1, 60.55, i++, 87.402);
 	AddWall(10, 2, 1, 39.05, 1, 50.51, i++, 79.393);
-	AddWall(10, 2, 1, 42.07, 41.14, i++, 65.705);
+	AddWall(10, 2, 1, 42.07,1, 41.14, i++, 65.705);
 
 	AddWall(10, 2, 1, 37.26, 1, 39.07, i++, 22.648);
 	AddWall(10, 2, 1, 28.05, 1, 42.89, i++, 22.562);
@@ -915,6 +915,7 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 		if (sensor[1]->checkpoint == true || start == true) {
 				if (start == true) {
 					start = false;
+					actual.Start();
 				}
 				else {
 					lap = actual;
@@ -926,8 +927,8 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 					for (int i = 0; i < powerups.Count(); i++) {
 						powerups[i].invisible = false;
 					}
-				}
-				actual.Start();
+					actual.Start();
+				}	
 		}
 	}
 	else if (body1 == sensor[1]) {
