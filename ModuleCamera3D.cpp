@@ -44,17 +44,32 @@ update_status ModuleCamera3D::Update(float dt)
 	// Implement a debug camera with keys and mouse
 	// Now we can make this movememnt frame rate independant!
 
-	mat4x4 matrix;
-	App->player->vehicle->GetTransform(&matrix);
-	
-	Position = matrix.translation();
+	if (App->scene_intro->lap5 < 5) {
+		mat4x4 matrix;
+		App->player->vehicle->GetTransform(&matrix);
 
-	X = vec3{ matrix[0],matrix[1],matrix[2] };
-	Y = vec3{ matrix[4], matrix[5], matrix[6] };
-	Z = vec3{ matrix[8], matrix[9],matrix[10] };
+		Position = matrix.translation();
 
-	vec3 VehicleLocation = { matrix[12], matrix[13] + car_cam.y, matrix[14] };
-	Look((VehicleLocation)-Z * 25, VehicleLocation, true);
+		X = vec3{ matrix[0],matrix[1],matrix[2] };
+		Y = vec3{ matrix[4], matrix[5], matrix[6] };
+		Z = vec3{ matrix[8], matrix[9],matrix[10] };
+
+		vec3 VehicleLocation = { matrix[12], matrix[13] + car_cam.y, matrix[14] };
+		Look((VehicleLocation)-Z * 25, VehicleLocation, true);
+	}
+	else {
+		mat4x4 matrix;
+		App->player->vehicle->GetTransform(&matrix);
+
+		Position = matrix.translation();
+
+		X = vec3{ matrix[0],matrix[1],matrix[2] };
+		Y = vec3{ matrix[4], matrix[5], matrix[6] };
+		Z = vec3{ matrix[8], matrix[9],matrix[10] };
+
+		vec3 VehicleLocation = { matrix[12], matrix[13] + car_cam.y, matrix[14] };
+		Look((VehicleLocation)-Z *50, VehicleLocation, true);
+	}
 
 	// Recalculate matrix -------------
 	CalculateViewMatrix();

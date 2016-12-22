@@ -19,6 +19,7 @@ bool ModuleSceneIntro::Start()
 	turbo = 50.0;
 	fastest = 100.0;
 	start = true;
+	total_time = 0;
 
 	Floor.color = Grey;
 	Floor.size = { 10000,0,10000 };
@@ -918,15 +919,22 @@ update_status ModuleSceneIntro::Update(float dt)
 void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 {
 	if (body1 == sensor[0]) {
-		if (sensor[1]->checkpoint == true || start == true) {
-			if (start == true) {
-				start = false;
-				actual.Start();
-			}
-			else {
+		if (start == true) {
+			start = false;
+			actual.Start();
+		}
+		if (sensor[1]->checkpoint == true && sensor[2]->checkpoint == true && sensor[3]->checkpoint == true && sensor[4]->checkpoint == true && sensor[5]->checkpoint == true) {
 				lap = actual;
+				total_time += lap.Read();
 				LOG("LAP TIME: %i SECONDS", lap.Read() / 1000);
 				sensor[1]->checkpoint = false;
+				sensor[2]->checkpoint = false;
+				sensor[3]->checkpoint = false;
+				sensor[4]->checkpoint = false;
+				sensor[5]->checkpoint = false;
+				if (lap5 < 5) {
+					lap5++;
+				}
 				if (lap.Read() / 1000 < fastest) {
 					fastest = lap.Read() / 1000;
 				}
@@ -934,12 +942,24 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 					powerups[i].invisible = false;
 				}
 				actual.Start();
-			}
 		}
 	}
 	else if (body1 == sensor[1]) {
 		sensor[1]->checkpoint = true;
 	}
+	else if (body1 == sensor[2]) {
+		sensor[2]->checkpoint = true;
+	}
+	else if (body1 == sensor[3]) {
+		sensor[3]->checkpoint = true;
+	}
+	else if (body1 == sensor[4]) {
+		sensor[4]->checkpoint = true;
+	}
+	else if (body1 == sensor[5]) {
+		sensor[5]->checkpoint = true;
+	}
+
 	else if (body1->ispowerup == true) {
 		if (powerups[body1->id].invisible != true) {
 			LOG("POWER UP");
