@@ -921,7 +921,6 @@ update_status ModuleSceneIntro::Update(float dt)
 {
 	Floor.Render();
 
-
 	for (int i = 0; i < wall.Count(); i++) {
 		wall[i].Render();
 	}

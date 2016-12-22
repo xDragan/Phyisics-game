@@ -104,6 +104,14 @@ bool ModulePlayer::Start()
 	vehicle->SetTransform(&matrix);
 
 
+	
+	tet.size.Set(3, 0.5, 0.5);
+	tet.color = Grey;
+	bodycub = App->physics->AddBody(tet,0.00001);
+	vec3 axis2(0, 1, -1);
+	vec3 axis1(0, -1, 0);
+	App->physics->AddConstraintHinge(*vehicle, *bodycub, axis2, axis1, { 0,1,0 }, { 0,5,0 }, false);
+
 	return true;
 }
 
@@ -118,8 +126,21 @@ bool ModulePlayer::CleanUp()
 // Update: draw background
 update_status ModulePlayer::Update(float dt)
 {
+	bodycub->GetTransform(&tet.transform);
+	tet.Render();
 	player_pos = vehicle->vehicle->getChassisWorldTransform().getOrigin();
 	turn = acceleration = brake = 0.0f;
+
+	if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN) {
+		vehicle->SetPos(-10.5, 0, 120.56);
+	}
+	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) {
+		mat4x4 matrix;
+		vehicle->SetPos(-10.5, 5, 120.56);
+		vehicle->GetTransform(&matrix);
+		matrix.rotate(90, { 90,0,90 });
+		vehicle->SetTransform(&matrix);
+	}
 	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT && fuel > 0)
 	{
 		if (vehicle->GetKmh()/3 > 120 && App->input->GetKey(SDL_SCANCODE_LSHIFT) != KEY_REPEAT) {
