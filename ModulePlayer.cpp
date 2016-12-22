@@ -127,7 +127,7 @@ update_status ModulePlayer::Update(float dt)
 		else if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT){
 			if (App->scene_intro->turbo > 0) {
 				App->scene_intro->turbo -= 0.5;
-				acceleration = MAX_ACCELERATION * 1000;
+				acceleration = MAX_ACCELERATION * 5;
 			}
 		}
 		else {
