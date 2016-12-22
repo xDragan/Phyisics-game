@@ -173,6 +173,7 @@ update_status ModulePlayer::Update(float dt)
 	
 	float fast = App->scene_intro->fastest;
 	char title[170];
+	sprintf_s(title, "%.1f Km/h // Fuel: %.3f // Lap time: %i Fastest Lap: %.2f TOTAL RACETIME: %.3f // LAP %.f/5 // TURBO AT %.f", vehicle->GetKmh()/3, fuel, App->scene_intro->actual.Read()/1000, fast, App->scene_intro->total_time/1000 , App->scene_intro->lap5, App->scene_intro->turbo);
 	App->window->SetTitle(title);
 
 	return UPDATE_CONTINUE;

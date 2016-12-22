@@ -53,6 +53,7 @@ public:
 	PhysBody3D* pu_body[5];
 	int x=0;//rotation for powerups
 
+	float lap5;
 	float turbo, total_time;
 	bool start;
 };

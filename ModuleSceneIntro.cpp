@@ -19,6 +19,7 @@ bool ModuleSceneIntro::Start()
 	turbo = 50.0;
 	fastest = 100.0;
 	start = true;
+	lap5 = 0;
 	total_time = 0;
 
 	Floor.color = Grey;
