@@ -100,7 +100,7 @@ bool ModulePlayer::Start()
 	vehicle->SetPos(0, 11, 115);
 	mat4x4 matrix;
 	vehicle->GetTransform(&matrix);
-	matrix.rotate(90, { 0,90,0 });
+	matrix.rotate(180, { 0,90,0 });
 	vehicle->SetTransform(&matrix);
 
 	return true;
