@@ -36,6 +36,7 @@ bool ModuleSceneIntro::Start()
 	AddSens(4.08, 2, 24.063, 163.4, 1, 152.94, j++, 90);
 	AddSens(4.08, 2, 24.063, 329.08, 1, 393.14, j++, 20.088);
 	AddSens(4.08, 2, 24.063, 251.21, 1, 378.55, j++, -25.507);
+	AddSens(11.78, 20, 19.188, -24.07, 0.1, 131.63, j++,0);
 	actual.Stop();
 	//track
 	int i = 0;
@@ -880,7 +881,7 @@ bool ModuleSceneIntro::Start()
 	AddBox(11.78, 2, 19.188, -24.07, 10, 78.04, Red, 0);
 	AddBox(11.78, 2, 19.188, -24.07, 10, 131.63, Green, 0);
 	AddBox(11.78, 0.1, 19.188, -24.07, 0.1, 78.04, Red, 0);
-	AddBox(11.78, 0.1, 19.188, -24.07, 0.1, 131.63, Green, 0);
+	AddBox(11.78, 0.1, 19.188, -24.07, 0.1, 131.63, Green, 0);//Fuel reload
 	return ret;
 }
 
@@ -960,7 +961,11 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 	else if (body1 == sensor[5]) {
 		sensor[5]->checkpoint = true;
 	}
-
+	else if (body1 == sensor[6]) {
+		if (App->player->fuel < 100) {
+			App->player->fuel += 0.5;
+		}
+	}
 	else if (body1->ispowerup == true) {
 		if (powerups[body1->id].invisible != true) {
 			LOG("POWER UP");

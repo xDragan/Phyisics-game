@@ -44,8 +44,8 @@ public:
 	Cube Floor;
 
 	
-	Cube sens[6];
-	PhysBody3D* sensor[6];
+	Cube sens[7];
+	PhysBody3D* sensor[7];
 	Timer lap, actual;
 	Uint32 fastest;
 

@@ -119,7 +119,6 @@ update_status ModulePlayer::Update(float dt)
 {
 	player_pos = vehicle->vehicle->getChassisWorldTransform().getOrigin();
 	turn = acceleration = brake = 0.0f;
-	fuel += 0.02;
 	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT && fuel > 0)
 	{
 		if (vehicle->GetKmh()/3 > 120 && App->input->GetKey(SDL_SCANCODE_LSHIFT) != KEY_REPEAT) {
@@ -161,7 +160,7 @@ update_status ModulePlayer::Update(float dt)
 		}
 	}
 	if (fuel > 0) {
-		fuel -= 0.01;
+		fuel -= 0.001;
 	}
 	brake = 10;
 
