@@ -22,7 +22,7 @@ public:
 	void OnCollision(PhysBody3D* body1, PhysBody3D* body2);
 	void AddWall(uint size_x, uint size_y, uint size_z, float pos_x, float pos_y, float pos_z, int tag, float angle=0);
 	void ModuleSceneIntro::AddBox(uint size_x, uint size_y, uint size_z, float pos_x, float pos_y, float pos_z, Color color, float angle);
-	void AddSens(uint size_x, uint size_y, uint size_z, float pos_x, float pos_y, float pos_z, uint id,float angle=0);
+	void AddSens(float size_x, float size_y, float size_z, float pos_x, float pos_y, float pos_z, uint id,float angle);
 	void AddPowerUp(uint size_x, uint size_y, uint size_z, float pos_x, float pos_y, float pos_z, uint id);
 
 public:
@@ -44,8 +44,8 @@ public:
 	Cube Floor;
 
 	
-	Cube sens[5];
-	PhysBody3D* sensor[5];
+	Cube sens[6];
+	PhysBody3D* sensor[6];
 	Timer lap, actual;
 	Uint32 fastest;
 

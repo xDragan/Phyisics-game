@@ -28,14 +28,12 @@ bool ModuleSceneIntro::Start()
 	AddPowerUp(3, 3, 3, 50, 1, 153, 0); 
 	//--------- Sensors
 	int j = 0;
-	//--------- Sensors
-	int j = 0;
-	AddSens(4.08, 0.1, 24.063, 240.43, 1, 15.11, j++);
-	AddSens(4.08, 0.1, 24.063, 586.22, 1, 39.46, j++, 4.3);
-	AddSens(4.08, 0.1, 24.063, 453.98, 1, 210.07, j++, 16.777);
-	AddSens(4.08, 0.1, 24.063, 163.4, 1, 152.94, j++, 90);
-	AddSens(4.08, 0.1, 24.063, 329.08, 1, 393.14, j++, 20.088);
-	AddSens(4.08, 0.1, 24.063, 251.21, 1, 378.55, j++, -25.507);
+	AddSens(4.08, 2, 24.063, 240.43, 1, 15.11, j++,0);
+	AddSens(4.08, 2, 24.063, 586.22, 1, 39.46, j++, 4.3);
+	AddSens(4.08, 2, 24.063, 453.98, 1, 210.07, j++, 16.777);
+	AddSens(4.08, 2, 24.063, 163.4, 1, 152.94, j++, 90);
+	AddSens(4.08, 2, 24.063, 329.08, 1, 393.14, j++, 20.088);
+	AddSens(4.08, 2, 24.063, 251.21, 1, 378.55, j++, -25.507);
 	actual.Stop();
 	//track
 	int i = 0;
@@ -992,13 +990,13 @@ void ModuleSceneIntro::AddPowerUp(uint size_x, uint size_y, uint size_z, float p
 	pu_body[id]->collision_listeners.add(this);
 }
 
-void ModuleSceneIntro::AddSens(uint size_x, uint size_y, uint size_z, float pos_x, float pos_y, float pos_z, uint id, float angle) {
+void ModuleSceneIntro::AddSens(float size_x, float  size_y, float  size_z, float pos_x, float pos_y, float pos_z, uint id, float angle) {
 
+	//Cube test;
 	sens[id].size = vec3(size_x, size_y, size_z);
 	sens[id].SetPos(pos_x, pos_y, pos_z);
 	sens[id].SetRotation(angle, { 0,90,0 });
 	sensor[id] = App->physics->AddBody(sens[id], 0.0f);
-
 	sensor[id]->SetAsSensor(true);
 	sensor[id]->collision_listeners.add(this);
 }
