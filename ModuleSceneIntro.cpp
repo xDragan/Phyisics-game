@@ -41,15 +41,15 @@ bool ModuleSceneIntro::Start()
 	AddPowerUp(13.789, 0.1, 16.849, -75.19, 1, 217.66, 1);
 	AddPowerUp(13.789, 0.1, 16.849, -53.85, 1, 217.66, 2);
 	AddPowerUp(13.789, 0.1, 16.849, -32.55, 1, 217.66, 3);
-	AddPowerUp(3, 3, 3, 272.627, 1, 21.007, 0);
-	AddPowerUp(3, 3, 3, 272.627, 1, 6.931, 0);
-	AddPowerUp(3, 3, 3, 780.896, 1, 196.164, 0);
-	AddPowerUp(3, 3, 3, 845.016, 1, 228.224, 0);
-	AddPowerUp(3, 3, 3, 278.883, 1, 75.743, 0);
-	AddPowerUp(3, 3, 3, 278.883, 1, 87.473, 0);
-	AddPowerUp(3, 3, 3, 261.68, 1, 256.374, 0);
-	AddPowerUp(3, 3, 3, 252.296, 1, 266.54, 0);
-	AddPowerUp(3, 3, 3, 41.169, 1, 107.021, 0);
+	AddPowerUp(3, 3, 3, 272.627, 1, 21.007, 4);
+	AddPowerUp(3, 3, 3, 272.627, 1, 6.931, 5);
+	AddPowerUp(3, 3, 3, 780.896, 1, 196.164, 6);
+	AddPowerUp(3, 3, 3, 845.016, 1, 228.224, 7);
+	AddPowerUp(3, 3, 3, 278.883, 1, 75.743, 8);
+	AddPowerUp(3, 3, 3, 278.883, 1, 87.473, 9);
+	AddPowerUp(3, 3, 3, 261.68, 1, 256.374, 10);
+	AddPowerUp(3, 3, 3, 252.296, 1, 266.54, 11);
+	AddPowerUp(3, 3, 3, 41.169, 1, 107.021, 12);
 
 	//////////////////////constraint
 	//	AddPowerUp(3, 3, 3, 50, 1, 153, 0); 
@@ -998,7 +998,7 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 			App->player->fuel += 0.5;
 		}
 	}
-	else if (body1->ispowerup == true) {
+	if (body1->ispowerup == true) {
 		if (powerups[body1->id].invisible != true) {
 			LOG("POWER UP");
 			powerups[body1->id].invisible = true;

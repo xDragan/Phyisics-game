@@ -130,72 +130,85 @@ update_status ModulePlayer::Update(float dt)
 	tet.Render();
 	player_pos = vehicle->vehicle->getChassisWorldTransform().getOrigin();
 	turn = acceleration = brake = 0.0f;
-
-	if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN) {
-		vehicle->SetPos(-10.5, 0, 120.56);
+	if (App->scene_intro->lap5 == 5) {
+		char title[170];
+		sprintf_s(title, "CONGRATS FOR YOUR SCORE!// TOTAL RACETIME: %.3f //", App->scene_intro->total_time / 1000);
+		App->window->SetTitle(title);
 	}
-	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) {
-		mat4x4 matrix;
-		vehicle->SetPos(-10.5, 15, 120.56);
-		vehicle->GetTransform(&matrix);
-		matrix.rotate(270, { 90,0,0 });
-		vehicle->SetTransform(&matrix);
-	}
-	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT && fuel > 0)
-	{
-		if (vehicle->GetKmh()/3 > 120 && App->input->GetKey(SDL_SCANCODE_LSHIFT) != KEY_REPEAT) {
-			acceleration = MAX_ACCELERATION/1000;
+	else {
+		if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN) {
+			vehicle->SetPos(-10.5, 0, 120.56);
 		}
-		else if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT){
-			if (App->scene_intro->turbo > 0) {
-				App->scene_intro->turbo -= 0.5;
-				acceleration = MAX_ACCELERATION * 5;
+		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
+			App->scene_intro->lap5 = 0;
+			App->scene_intro->total_time = 0;
+			App->scene_intro->lap.Start();
+			vehicle->SetPos(-10.5, 0, 120.56);
+		}
+		if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) {
+			mat4x4 matrix;
+			vehicle->SetPos(-10.5, 15, 120.56);
+			vehicle->GetTransform(&matrix);
+			matrix.rotate(270, { 90,0,0 });
+			vehicle->SetTransform(&matrix);
+		}
+		if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT && fuel > 0)
+		{
+			if (vehicle->GetKmh() / 3 > 120 && App->input->GetKey(SDL_SCANCODE_LSHIFT) != KEY_REPEAT) {
+				acceleration = MAX_ACCELERATION / 1000;
+			}
+			else if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT) {
+				if (App->scene_intro->turbo > 0) {
+					App->scene_intro->turbo -= 0.5;
+					acceleration = MAX_ACCELERATION * 5;
+				}
+			}
+			else {
+				acceleration = MAX_ACCELERATION;
+			}
+			if (fuel > 0) {
+				fuel -= 0.01;
 			}
 		}
-		else {
-			acceleration = MAX_ACCELERATION;
+		if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+		{
+			if (turn < TURN_DEGREES)
+				turn += TURN_DEGREES;
+		}
+
+		if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+		{
+			if (turn > -TURN_DEGREES)
+				turn -= TURN_DEGREES;
+		}
+
+		if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT && fuel>0)
+		{
+			if (vehicle->GetKmh() <= -30) {
+				acceleration = MAX_ACCELERATION / 10;
+			}
+			else {
+				acceleration = -MAX_ACCELERATION;
+				brake = BRAKE_POWER;
+			}
 		}
 		if (fuel > 0) {
-			fuel -= 0.01;
+			fuel -= 0.001;
 		}
-	}
-	if(App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
-	{
-		if(turn < TURN_DEGREES)
-			turn +=  TURN_DEGREES;
-	}
+		brake = 10;
 
-	if(App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
-	{
-		if(turn > -TURN_DEGREES)
-			turn -= TURN_DEGREES;
-	}
+		vehicle->ApplyEngineForce(acceleration);
+		vehicle->Turn(turn);
+		vehicle->Brake(brake);
 
-	if(App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT && fuel>0)
-	{
-		if (vehicle->GetKmh() <= -30) {
-			acceleration = MAX_ACCELERATION / 10;
-		}
-		else {
-			acceleration = -MAX_ACCELERATION;
-			brake = BRAKE_POWER;
-		}
-	}
-	if (fuel > 0) {
-		fuel -= 0.001;
-	}
-	brake = 10;
+		vehicle->Render();
 
-	vehicle->ApplyEngineForce(acceleration);
-	vehicle->Turn(turn);
-	vehicle->Brake(brake);
-
-	vehicle->Render();
+		float fast = App->scene_intro->fastest;
+		char title[170];
+		sprintf_s(title, "%.1f Km/h // Fuel: %.3f // Lap time: %i Fastest Lap: %.2f TOTAL RACETIME: %.3f // LAP %.f/5 // TURBO AT %.f", vehicle->GetKmh() / 3, fuel, App->scene_intro->actual.Read() / 1000, fast, App->scene_intro->total_time / 1000, App->scene_intro->lap5, App->scene_intro->turbo);
+		App->window->SetTitle(title);
+	}
 	
-	float fast = App->scene_intro->fastest;
-	char title[170];
-	sprintf_s(title, "%.1f Km/h // Fuel: %.3f // Lap time: %i Fastest Lap: %.2f TOTAL RACETIME: %.3f // LAP %.f/5 // TURBO AT %.f", vehicle->GetKmh()/3, fuel, App->scene_intro->actual.Read()/1000, fast, App->scene_intro->total_time/1000 , App->scene_intro->lap5, App->scene_intro->turbo);
-	App->window->SetTitle(title);
 
 	return UPDATE_CONTINUE;
 }
