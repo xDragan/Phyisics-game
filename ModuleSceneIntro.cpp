@@ -28,8 +28,14 @@ bool ModuleSceneIntro::Start()
 	AddPowerUp(3, 3, 3, 50, 1, 153, 0); 
 	//--------- Sensors
 	int j = 0;
-	AddSens(110, 6, 2, 5, 1, 123, j++);
-	AddSens(2, 6, 40, 120, 1, 123, j++);
+	//--------- Sensors
+	int j = 0;
+	AddSens(4.08, 0.1, 24.063, 240.43, 1, 15.11, j++);
+	AddSens(4.08, 0.1, 24.063, 586.22, 1, 39.46, j++, 4.3);
+	AddSens(4.08, 0.1, 24.063, 453.98, 1, 210.07, j++, 16.777);
+	AddSens(4.08, 0.1, 24.063, 163.4, 1, 152.94, j++, 90);
+	AddSens(4.08, 0.1, 24.063, 329.08, 1, 393.14, j++, 20.088);
+	AddSens(4.08, 0.1, 24.063, 251.21, 1, 378.55, j++, -25.507);
 	actual.Stop();
 	//track
 	int i = 0;
@@ -98,7 +104,7 @@ bool ModuleSceneIntro::Start()
 	AddWall(10, 2, 1, 594.8f, 1, 9.98, i++, -38.184);
 	AddWall(10, 2, 1, 600.59, 1, 17.99, i++, -69.129);
 	AddWall(10, 2, 1, 603.56f, 1, 27.57, i++, -77.172);
-	AddWall(10, 2, 1, 608.8f, 1, 37.32, i++, -76.59);
+	AddWall(10, 2, 1, 605.8f, 1, 37.32, i++, -76.59);
 	AddWall(10, 2, 1, 608.16, 1, 47.03, i++, -75.472);
 	AddWall(10, 2, 1, 610.84, 1, 56.59, i++, -72.61);
 	//curva 2 (chicana) ext
@@ -631,7 +637,7 @@ bool ModuleSceneIntro::Start()
 	AddWall(10, 2, 1, 130.96, 1, 369.09, i++, -8.868);
 	AddWall(10, 2, 1, 121.2, 1, 367.18, i++, -8.868);
 	AddWall(10, 2, 1, 111.38, 1, 365.3, i++, -8.868);
-	AddWall(10, 2, 1, 101.76, 1,363.57, i++, -8.868);
+	AddWall(10, 2, 1, 101.76, 1, 363.57, i++, -8.868);
 	AddWall(10, 2, 1, 92.13, 1, 360.7, i++, -21.448);
 	AddWall(10, 2, 1, 83.02, 1, 356.61, i++, -27.349);
 	AddWall(10, 2, 1, 74.34, 1, 351.56, i++, -33.61);
@@ -746,16 +752,16 @@ bool ModuleSceneIntro::Start()
 	AddWall(10, 2, 1, 549.14, 1, 85.45, i++, 21.597);
 	AddWall(10, 2, 1, 558.46, 1, 81.72, i++, 21.371);
 	AddWall(10, 2, 1, 568.22, 1, 79.73, i++);
-	AddWall(10, 2, 1, 678.18, 1, 134.03, i++, 22.08);
+	AddWall(10, 2, 1, 678.18, 1, 134.03, i++, 20.08);
 	AddWall(10, 2, 1, 687.54, 1, 132.77, i++, -7.054);
 	AddWall(10, 2, 1, 697.57, 1, 134.38, i++, -10.008);
 	AddWall(10, 2, 1, 707.49, 1, 135.89, i++, -6.082);
 	AddWall(10, 2, 1, 717.53, 1, 137.05, i++, -6.287);
 	AddWall(10, 2, 1, 727.52, 1, 137.88, i++, -2.169);
 	AddWall(10, 2, 1, 737.62, 1, 138.02, i++, 2.045);
-	AddWall(10, 2, 1, 747.62, 1, 137.78, i++, 2.045);
+	AddWall(10, 2, 1, 747.62, 1, 137.78, i++, 1.9);
 	AddWall(10, 2, 1, 757.64, 1, 137.63, i++, -2.203);
-	AddWall(10, 2, 1, 767.64, 1, 137.9, i++, 7.7377);
+	AddWall(10, 2, 1, 767.64, 1, 137.9, i++, -2.36);
 	AddWall(10, 2, 1, 777.66, 1, 138.48, i++, -5.711);
 	AddWall(10, 2, 1, 787.58, 1, 139.43, i++, -5.673);
 	AddWall(10, 2, 1, 797.55, 1, 140.54, i++, -6.34);
@@ -828,7 +834,7 @@ bool ModuleSceneIntro::Start()
 	AddWall(10, 2, 1, 703.31, 1, 154.55, i++, -13.41);
 	AddWall(10, 2, 1, 693.56, 1, 151.89, i++, -16.094);
 	AddWall(10, 2, 1, 685.35, 1, 147.11, i++, -42.723);
-	AddWall(10, 2, 1, 678.15, 1, 140.02, i++, 21.523);
+	AddWall(10, 2, 1, 678.15, 1, 140.02, i++, -45.16);
 
 	AddWall(10, 2, 1, 32.96, 1, 169.32, i++, 87.402);
 	AddWall(10, 2, 1, 33.4, 1, 159.54, i++, 87.402);
@@ -843,7 +849,7 @@ bool ModuleSceneIntro::Start()
 	AddWall(10, 2, 1, 37.26, 1, 70.33, i++, 87.402);
 	AddWall(10, 2, 1, 37.7, 1, 60.55, i++, 87.402);
 	AddWall(10, 2, 1, 39.05, 1, 50.51, i++, 79.393);
-	AddWall(10, 2, 1, 42.07,1, 41.14, i++, 65.705);
+	AddWall(10, 2, 1, 42.07, 1, 41.14, i++, 65.705);
 
 	AddWall(10, 2, 1, 37.26, 1, 39.07, i++, 22.648);
 	AddWall(10, 2, 1, 28.05, 1, 42.89, i++, 22.562);
@@ -859,10 +865,10 @@ bool ModuleSceneIntro::Start()
 	AddWall(10, 2, 1, 5.2, 1, 130.52, i++, -92.298);
 	AddWall(10, 2, 1, 4.77, 1, 140.58, i++, -92.298);
 	AddWall(10, 2, 1, 8.1, 1, 149.58, i++, -46.454);
-	AddWall(10, 2, 1, 14.81, 1, 56.7, i++, -46.454);
+	AddWall(10, 2, 1, 14.81, 1, 156.7, i++, -46.454);
 	AddWall(10, 2, 1, 21.72, 1, 163.94, i++, -46.454);
 	AddWall(10, 2, 1, 28.44, 1, 171.06, i++, -46.454);
-	
+
 	AddBox(20.242, 20, 1, -39.46, 1, 53.82, Grey, 0);
 	AddBox(20.242, 20, 1, -39.46, 1, 155.84, Grey, 0);
 	AddBox(1.514, 20, 103.324, -48.82, 1, 104.63, Blue, 0);
@@ -903,10 +909,11 @@ update_status ModuleSceneIntro::Update(float dt)
 
 	if (x < 360) {
 		x++;
-	}else {
+	}
+	else {
 		x = 0;
 	}
-	
+
 	return UPDATE_CONTINUE;
 }
 
@@ -914,22 +921,22 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 {
 	if (body1 == sensor[0]) {
 		if (sensor[1]->checkpoint == true || start == true) {
-				if (start == true) {
-					start = false;
-					actual.Start();
+			if (start == true) {
+				start = false;
+				actual.Start();
+			}
+			else {
+				lap = actual;
+				LOG("LAP TIME: %i SECONDS", lap.Read() / 1000);
+				sensor[1]->checkpoint = false;
+				if (lap.Read() / 1000 < fastest) {
+					fastest = lap.Read() / 1000;
 				}
-				else {
-					lap = actual;
-					LOG("LAP TIME: %i SECONDS", lap.Read() / 1000);
-					sensor[1]->checkpoint = false;
-					if (lap.Read() / 1000 < fastest) {
-						fastest = lap.Read() / 1000;
-					}
-					for (int i = 0; i < powerups.Count(); i++) {
-						powerups[i].invisible = false;
-					}
-					actual.Start();
-				}	
+				for (int i = 0; i < powerups.Count(); i++) {
+					powerups[i].invisible = false;
+				}
+				actual.Start();
+			}
 		}
 	}
 	else if (body1 == sensor[1]) {
@@ -980,16 +987,18 @@ void ModuleSceneIntro::AddPowerUp(uint size_x, uint size_y, uint size_z, float p
 	w1.SetPos(pos_x, pos_y, pos_z);
 	w1.color = LBlue;
 	powerups.PushBack(w1);
-	pu_body[id]=App->physics->AddBody(w1, 0.0f);
-	pu_body[id]->SetAsPowerup(true,id);
+	pu_body[id] = App->physics->AddBody(w1, 0.0f);
+	pu_body[id]->SetAsPowerup(true, id);
 	pu_body[id]->collision_listeners.add(this);
 }
 
-void ModuleSceneIntro::AddSens(uint size_x, uint size_y, uint size_z, float pos_x, float pos_y, float pos_z, uint id) {
+void ModuleSceneIntro::AddSens(uint size_x, uint size_y, uint size_z, float pos_x, float pos_y, float pos_z, uint id, float angle) {
 
 	sens[id].size = vec3(size_x, size_y, size_z);
 	sens[id].SetPos(pos_x, pos_y, pos_z);
+	sens[id].SetRotation(angle, { 0,90,0 });
 	sensor[id] = App->physics->AddBody(sens[id], 0.0f);
+
 	sensor[id]->SetAsSensor(true);
 	sensor[id]->collision_listeners.add(this);
-}	
+}
