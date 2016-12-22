@@ -862,6 +862,18 @@ bool ModuleSceneIntro::Start()
 	AddWall(10, 2, 1, 21.72, 1, 163.94, i++, -46.454);
 	AddWall(10, 2, 1, 28.44, 1, 171.06, i++, -46.454);
 	
+	AddBox(20.242, 20, 1, -39.46, 1, 53.82, Grey, 0);
+	AddBox(20.242, 20, 1, -39.46, 1, 155.84, Grey, 0);
+	AddBox(1.514, 20, 103.324, -48.82, 1, 104.63, Blue, 0);
+	AddBox(1.514, 2, 103.324, -30.09, 12, 104.63, Grey, 0);
+	AddBox(1.514, 20, 15.141, -30.09, 1, 148.79, Grey, 0);
+	AddBox(1.514, 20, 34.4, -30.09, 1, 104.83, Grey, 0);
+	AddBox(1.514, 20, 15.141, -30.09, 1, 60.87, Grey, 0);
+	AddBox(22.634, 1, 112.538, -39.46, 12, 105.17, Grey, 0);
+	AddBox(11.78, 2, 19.188, -24.07, 10, 78.04, Red, 0);
+	AddBox(11.78, 2, 19.188, -24.07, 10, 131.63, Green, 0);
+	AddBox(11.78, 0.1, 19.188, -24.07, 0.1, 78.04, Red, 0);
+	AddBox(11.78, 0.1, 19.188, -24.07, 0.1, 131.63, Green, 0);
 	return ret;
 }
 
@@ -935,6 +947,17 @@ void ModuleSceneIntro::AddWall(uint size_x, uint size_y, uint size_z, float pos_
 	else {
 		color = Black;
 	}
+	Cube w1;
+	w1.size.Set(size_x, size_y, size_z);
+	w1.SetPos(pos_x, pos_y, pos_z);
+	w1.color = color;
+	w1.SetRotation(angle, { 0,90,0 });
+	wall.PushBack(w1);
+	App->physics->AddBody(wall[wall.Count() - 1], 0);
+}
+void ModuleSceneIntro::AddBox(uint size_x, uint size_y, uint size_z, float pos_x, float pos_y, float pos_z, Color color, float angle) {
+
+
 	Cube w1;
 	w1.size.Set(size_x, size_y, size_z);
 	w1.SetPos(pos_x, pos_y, pos_z);

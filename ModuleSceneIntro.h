@@ -21,6 +21,7 @@ public:
 
 	void OnCollision(PhysBody3D* body1, PhysBody3D* body2);
 	void AddWall(uint size_x, uint size_y, uint size_z, float pos_x, float pos_y, float pos_z, int tag, float angle=0);
+	void ModuleSceneIntro::AddBox(uint size_x, uint size_y, uint size_z, float pos_x, float pos_y, float pos_z, Color color, float angle);
 	void AddSens(uint size_x, uint size_y, uint size_z, float pos_x, float pos_y, float pos_z, uint id);
 	void AddPowerUp(uint size_x, uint size_y, uint size_z, float pos_x, float pos_y, float pos_z, uint id);
 
